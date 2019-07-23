@@ -17,7 +17,7 @@ import * as errors from './errors'
 
 const MIN_CHUNK_SIZE = 262144
 
-export default class fileUploadGCS {
+export default class FileUploadGCS {
   static errors = errors;
 
   constructor (args, allowSmallChunks) {
@@ -80,7 +80,7 @@ export default class fileUploadGCS {
       await processor.run(uploadChunk, resumeIndex)
     }
 
-    const uploadChunk = async (checksum, index, chunk) => {
+    const uploadChunk = async (checksum, index, chunk) => {   
       const total = opts.file.size
       const start = index * opts.chunkSize
       const end = index * opts.chunkSize + chunk.byteLength - 1

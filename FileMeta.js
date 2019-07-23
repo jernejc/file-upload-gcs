@@ -1,4 +1,4 @@
-const STORAGE_KEY = '__gcsBrowserUpload'
+const STORAGE_KEY = '__gcsFileUpload'
 
 export default class FileMeta {
   constructor (id, fileSize, chunkSize, storage) {
