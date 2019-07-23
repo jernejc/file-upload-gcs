@@ -17,7 +17,7 @@ import * as errors from './errors'
 
 const MIN_CHUNK_SIZE = 262144
 
-export default class Upload {
+export default class fileUploadGCS {
   static errors = errors;
 
   constructor (args, allowSmallChunks) {
