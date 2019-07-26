@@ -1,7 +1,7 @@
 
-import SparkMD5 from 'spark-md5';
+const SparkMD5 = require('spark-md5');
 
-export default class FileProcessor {
+class FileProcessor {
   constructor (file, chunkSize) {
     this.paused = false
     this.file = file
@@ -76,3 +76,4 @@ async function getData (file, blob) {
   })
 }
 
+module.exports = FileProcessor

@@ -1,28 +1,16 @@
-import { put } from 'axios'
-import FileMeta from './FileMeta'
-import FileProcessor from './FileProcessor'
-import {
-  DifferentChunkError,
-  FileAlreadyUploadedError,
-  UrlNotFoundError,
-  UploadFailedError,
-  UnknownResponseError,
-  MissingOptionsError,
-  UploadIncompleteError,
-  InvalidChunkSizeError,
-  UploadAlreadyFinishedError
-} from './errors'
-import * as errors from './errors'
+const axios = require('axios');
+const FileMeta = require('./FileMeta');
+const FileProcessor = require('./FileProcessor');
+const errors = require('./errors');
 
-const MIN_CHUNK_SIZE = 262144
+const MIN_CHUNK_SIZE = 262144;
 
-export default class FileUploadGCS {
-  static errors = errors;
+class FileUploadGCS {
 
   constructor (args, allowSmallChunks) {
     var opts = {
       chunkSize: MIN_CHUNK_SIZE,
-      storage: window.localStorage,
+      storage: args.localStorage || 'test',
       contentType: 'text/plain',
       onChunkUpload: () => {},
       id: null,
@@ -166,6 +154,8 @@ export default class FileUploadGCS {
   }
 }
 
+module.exports = FileUploadGCS;
+
 function checkResponseStatus (res, opts, allowed = []) {
   const { status } = res
   if (allowed.indexOf(status) > -1) {
@@ -196,7 +186,7 @@ function checkResponseStatus (res, opts, allowed = []) {
 
 async function safePut () {
   try {
-    return await put.apply(null, arguments)
+    return await axios.put.apply(null, arguments)
   } catch (e) {
     if (e instanceof Error) {
       throw e

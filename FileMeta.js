@@ -1,6 +1,6 @@
 const STORAGE_KEY = '__gcsFileUpload'
 
-export default class FileMeta {
+class FileMeta {
   constructor (id, fileSize, chunkSize, storage) {
     this.id = id
     this.fileSize = fileSize
@@ -59,3 +59,5 @@ export default class FileMeta {
     this.setMeta(null)
   }
 }
+
+module.exports = FileMeta;
